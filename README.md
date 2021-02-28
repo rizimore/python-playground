@@ -3,26 +3,26 @@
 ## Usage
 
 - Web Development
-  - Django
-  - Flask
-  - Pylons
-  
+    - Django
+    - Flask
+    - Pylons
+
 - Testing
-  - Selenium
-  - Splinter
-  - PyTest
-  - Robot Framework
+    - Selenium
+    - Splinter
+    - PyTest
+    - Robot Framework
 
 - Artificial Intelligence
-  - Keras
-  - Tensorflow
-  
+    - Keras
+    - Tensorflow
+
 - Image Processing
-  - openCV
-  
+    - openCV
+
 - Big Data
-  - Pydoop
-  - Dask
-  - Pyspark
+    - Pydoop
+    - Dask
+    - Pyspark
 
 - Data Science
