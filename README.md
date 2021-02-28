@@ -26,3 +26,14 @@
     - Pyspark
 
 - Data Science
+
+## Programming Basic
+
+- data types
+- comparison operators
+- conditional statements
+- repetitive statements
+- functions
+- lambda functions
+- file handling
+- libraries
