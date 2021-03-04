@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import os.path
 
 # Get all the topics name
 topics_html = requests.get("https://www.brainyquote.com/topics").text
@@ -11,6 +12,11 @@ for topic_name in topics_soup.findAll("span", {"class": "topicContentName"}):
     topics.append(topic_name.get_text().lower().replace(" ", "-").replace("'", ""))
 
 for topic in topics:
+    if os.path.exists("data/topics/" + topic + ".csv"):
+        continue
+
+    print("Scraping: " + topic)
+
     quotes = []
 
     topic_url = "https://www.brainyquote.com/topics/" + topic
@@ -19,12 +25,15 @@ for topic in topics:
     topic_html = requests.get(topic_url).text
     topic_soup = BeautifulSoup(topic_html, 'html.parser')
 
-    pages = int(topic_soup.select_one("ul.pagination > li:nth-last-child(2) > a").get_text())
-
     # Make pagination links
     urls = [topic_url]
-    for page in range(2, pages + 1):
-        urls.append("https://www.brainyquote.com/topics/" + topic + "_" + str(page))
+
+    try:
+        pages = int(topic_soup.select_one("ul.pagination > li:nth-last-child(2) > a").get_text())
+        for page in range(2, pages + 1):
+            urls.append("https://www.brainyquote.com/topics/" + topic + "_" + str(page))
+    except:
+        pass
 
     # Scrap every single pagination
     for url in urls:
@@ -51,4 +60,4 @@ for topic in topics:
                 pass
 
     # Save data into csv
-    pd.DataFrame(quotes).to_csv(topic + ".csv", index=False)
+    pd.DataFrame(quotes).to_csv("data/topics/" + topic + ".csv", index=False)
