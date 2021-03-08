@@ -21,6 +21,7 @@ Instructions:
 
 # init chart
 import matplotlib.pyplot as plt
+from tabulate import tabulate
 
 # Requirements
 arrival_times = []
@@ -98,6 +99,32 @@ for i in range(0, no_of_processes):
     height = 1
     gnt.broken_barh([(start_time, duration)], (lower_yaxis, height))
 
-    print(i, start_time, duration, lower_yaxis, height)
+    print("P" + str(i+1), end="")
+    for j in range(0, duration):
+        print("-", end="")
+    print("|", end="")
+print("")
 
 plt.show()
+
+# Print the table
+table = []
+for i in range(0, no_of_processes):
+    row = [
+        i,
+        arrival_times[i],
+        burst_times[i],
+        completion_times[i],
+        turnaround_times[i],
+        waiting_times[i]
+    ]
+    table.append(row)
+
+print(tabulate(table, headers=[
+    "P ID",
+    "Arrival Time",
+    "Burst Time",
+    "Completion Time",
+    "Turn Around Time",
+    "Waiting Time"
+], tablefmt="orgtbl"))
